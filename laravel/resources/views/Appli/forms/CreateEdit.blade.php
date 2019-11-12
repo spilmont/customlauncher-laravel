@@ -15,3 +15,17 @@
     {!! Form::select('categories_id',App\Categories::pluck('name','id'),['class'=>'form-control']) !!}
 </div>
 
+@if($errors->any())
+
+    <div class="alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+
+                <li> {{$error}}</li>
+
+            @endforeach
+        </ul>
+    </div>
+     @endif
+
+

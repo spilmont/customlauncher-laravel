@@ -50,17 +50,23 @@ class ApplicationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AplliCreateEditRequest $request)
     {
 
-       Application::create([
-            'name' => request('name'),
-            'path' => request('path'),
-            'cover' =>request('cover'),
-            'categories_id' => request('categories_id'),
-            'user_id' => auth()->id()
-        ]);
 
+
+
+        if(pathinfo($request['path'],PATHINFO_EXTENSION)=="exe" or pathinfo($request['path'],PATHINFO_EXTENSION)=="lnk"){
+            Application::create([
+                'name' => request('name'),
+                'path' => request('path'),
+                'cover' =>request('cover'),
+                'categories_id' => request('categories_id'),
+                'user_id' => auth()->id()
+            ]);
+        }else{
+           return redirect()->back()->withErrors("le chemin ne pointe pas vers un exe ou un raccourci (lnk)");
+        }
 
 
 
@@ -102,11 +108,11 @@ class ApplicationsController extends Controller
     {
         $application = Application::findOrFail($id);
         $application->fill(['user_id'=>Auth::user()->getAuthIdentifier()]);
-        $application->update($request->all());
-
-
-
-
+        if(pathinfo($request['path'],PATHINFO_EXTENSION)=="exe" or pathinfo($request['path'],PATHINFO_EXTENSION)=="lnk") {
+            $application->update($request->all());
+        }else{
+            return redirect()->back()->withErrors("le chemin ne pointe pas vers un exe ou un raccourci (lnk)");
+        }
 
         return redirect(route('app.index', compact('application') ))->with('sucess',"L'application a bien était mise a jour");
     }

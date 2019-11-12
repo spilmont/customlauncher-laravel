@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Application;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class AplliCreateEditRequest extends FormRequest
 {
@@ -26,9 +27,9 @@ class AplliCreateEditRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => 'required|min:1',
-            "path" => 'mines:exe,lnk',
-            "cover" =>'mines:png,gif,jpg'
+            "name" => 'required|min:1',
+           "path"=>"required|"
+
         ];
     }
 }
