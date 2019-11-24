@@ -134,21 +134,25 @@ class ApplicationsController extends Controller
     return redirect()->route('app.index')->with('sucess',"L'application a était supprimée du launcher");
 }
 
-
-
+// function for launch application
     public function start($id){
 
         $application = Application::findOrFail($id);
 
-        system($application->path);
+        $application->update(['launch'=>1]);
+
+        $test = Application::where('launch',1)->get();
+
+        exec($application->path.'&');
+
+
+        $application->update(['launch'=>0]);
 
 
 
-
-        return back();
-
-
-
+        return redirect(route('app.index', compact('application','test') ));
 
     }
+
+
 }

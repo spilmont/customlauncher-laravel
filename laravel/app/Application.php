@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $fillable =['name','path','cover','categories_id','user_id'];
+    protected $fillable =['name','path','cover','categories_id','user_id','launch'];
 
     public function categories()
     {

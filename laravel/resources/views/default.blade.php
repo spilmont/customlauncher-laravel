@@ -23,11 +23,17 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Application</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
+               <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Jeux</a>
                     <a class="dropdown-item" href="#">Logiciel</a>
                 </div>
-            @if(Auth::check() == true)
+
+
+
+
+
+
+        @if(Auth::check() == true)
                 <li class="nav-item">
                     <a class="nav-link" href="/logout" tabindex="-1" >Logout</a>
                 </li>

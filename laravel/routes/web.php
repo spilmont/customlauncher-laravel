@@ -28,4 +28,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('app');
 
 
+Route::resource('friends','FriendsController');
+
 
